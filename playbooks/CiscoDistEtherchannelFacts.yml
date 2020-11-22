@@ -1,0 +1,204 @@
+---
+
+- hosts: CampusDist
+# Include Clays Collection # 
+# https://github.com/clay584/parse_genie #  
+  collections:
+    - clay584.genie
+  vars_prompt:
+    - name: IOS_User_Prompt
+      prompt: "Enter Cisco IOS Username"
+      private: no 
+    - name: IOS_Password_Prompt
+      prompt: "Enter IOS Password"
+      private: yes   
+  tasks:
+# Register Username and Password #
+    - set_fact:   
+        ios_user: "{{ IOS_User_Prompt }}"     
+        ios_password: "{{ IOS_Password_Prompt }}"
+      no_log: true
+      delegate_to: localhost
+      run_once: true   
+
+# Gather Ansible Facts About Distribution VRFs #
+    - name: show vrf
+      ios_command:
+        commands:
+          - show etherchannel summary
+      register: etherchannel_summary_raw
+
+    - name: Set Fact Genie Filter 
+      set_fact:
+        pyats_etherchannel_summary: "{{ etherchannel_summary_raw['stdout'][0] | parse_genie(command='show etherchannel summary', os='ios') }}"
+
+# Print facts on screen #          
+    - debug: 
+        msg: "{{ pyats_etherchannel_summary }}"
+
+# Create RAW JSON, Nice JSON, Nice YAML Files #
+# Create JSON file with Ansible Facts #
+    - name: Create RAW JSON file
+      copy: 
+        content: | 
+          {{ pyats_etherchannel_summary }}
+        dest: ../documentation/FACTS/CAMPUS/DISTRIBUTION/{{ inventory_hostname }}_Show_Etherchannel_Summary_RAW.json
+
+# Create JSON file with Ansible Facts #
+    - name: Create raw JSON file
+      copy: 
+        content: | 
+          {{ pyats_etherchannel_summary | to_nice_json }}
+        dest: ../documentation/FACTS/CAMPUS/DISTRIBUTION/{{ inventory_hostname }}_Show_Etherchannel_Summary_Nice.json
+
+# Create YAML file with Ansible Facts #
+    - name: Create raw YAML
+      copy: 
+        content: | 
+          {{ pyats_etherchannel_summary | to_nice_yaml }}
+        dest: ../documentation/FACTS/CAMPUS/DISTRIBUTION/{{ inventory_hostname }}_Show_Etherchannel_Summary.yml
+
+# Add Headers to YAML #
+    - name: Header Row
+      lineinfile:
+        path: ../documentation/FACTS/CAMPUS/DISTRIBUTION/{{ inventory_hostname }}_Show_Etherchannel_Summary.yml
+        insertbefore: BOF
+        line: ---        
+      delegate_to: localhost
+
+# Create CSV File #
+# Remove file #
+    - name: Remove file (delete file)
+      file:
+        path: ../documentation/FACTS/CAMPUS/DISTRIBUTION/{{ inventory_hostname }}_Show_Etherchannel_Totals.csv
+        state: absent
+
+# Create Etherchannel CSV file with summary totals results #
+    - name: CSV Data Row
+      lineinfile:
+        path: ../documentation/FACTS/CAMPUS/DISTRIBUTION/{{ inventory_hostname }}_Show_Etherchannel_Totals.csv
+        line: "{{ pyats_etherchannel_summary.number_of_aggregators }},{{ pyats_etherchannel_summary.number_of_lag_in_use }}"
+        create: yes
+
+# Add Header Row to CSV #
+    - name: CSV Header Row
+      lineinfile:
+        path: ../documentation/FACTS/CAMPUS/DISTRIBUTION/{{ inventory_hostname }}_Show_Etherchannel_Totals.csv       
+        insertbefore: BOF
+        line: Number of Aggregators,Number of LAG in use
+
+# Remove file #
+    - name: Remove file (delete file)
+      file:
+        path: ../documentation/FACTS/CAMPUS/DISTRIBUTION/{{ inventory_hostname }}_Show_Etherchannel_Summary.csv
+        state: absent
+
+# Create Etherchannel CSV file with results #
+    - name: CSV Data Row
+      lineinfile:
+        path: ../documentation/FACTS/CAMPUS/DISTRIBUTION/{{ inventory_hostname }}_Show_Etherchannel_Summary.csv
+        line: "{{ item.key }},{{ item.value.bundle_id }},{{ item.value.name }},{{ item.value.oper_status }},{% if item.value.protocol is defined %}{{ item.value.protocol }}{% else %}Mode On{% endif %},{{ item.value.flags }},{% if item.value.port_channel.port_channel_member_intfs is defined %}{{ item.value.port_channel.port_channel_member_intfs }}{% else %}No Members{% endif %}"
+        create: yes
+      loop: "{{ pyats_etherchannel_summary.interfaces | dict2items }}"
+
+# Format CSV #
+    - name: Format CSV File Clean Up
+      replace:
+        path: ../documentation/FACTS/CAMPUS/DISTRIBUTION/{{ inventory_hostname }}_Show_Etherchannel_Summary.csv       
+        regexp: "'"
+        replace: ''
+
+# Format CSV #
+    - name: Format CSV File Clean Up
+      replace:
+        path: ../documentation/FACTS/CAMPUS/DISTRIBUTION/{{ inventory_hostname }}_Show_Etherchannel_Summary.csv
+        regexp: '\[|\]|"'
+        replace: ''            
+
+# Add Header Row to CSV #
+    - name: CSV Header Row
+      lineinfile:
+        path: ../documentation/FACTS/CAMPUS/DISTRIBUTION/{{ inventory_hostname }}_Show_Etherchannel_Summary.csv       
+        insertbefore: BOF
+        line: Port-Channel,Bundle ID,Name,Status,Protocol,Flags,Member01,Member02,Member03,Member04,Member05,Member06,Member07,Member08
+
+# Create Markdown File #
+# Remove file #
+    - name: Remove file (delete file)
+      file:
+        path: ../documentation/FACTS/CAMPUS/DISTRIBUTION/{{ inventory_hostname }}_Show_Etherchannel_Totals.md
+        state: absent
+
+# Create Port Channel Markdown file with summary totals results #
+    - name: Markdown Data Row
+      lineinfile:
+        path: ../documentation/FACTS/CAMPUS/DISTRIBUTION/{{ inventory_hostname }}_Show_Etherchannel_Totals.md
+        line: "| {{ pyats_etherchannel_summary.number_of_aggregators }} | {{ pyats_etherchannel_summary.number_of_lag_in_use }} |"
+        create: yes
+
+# Add Header Rows to Markdown #
+    - name: Markdown Header Row
+      lineinfile:
+        path: ../documentation/FACTS/CAMPUS/DISTRIBUTION/{{ inventory_hostname }}_Show_Etherchannel_Totals.md     
+        insertbefore: BOF
+        line: "{{ item.property }}"
+      with_items:
+        - { property: '| --------------------- | -------------------- |' }
+        - { property: '| Number of Aggregators | Number of LAG in use |' }
+        - { property: '# Etherchannel Totals for {{ inventory_hostname }}' }  
+
+# Create Mind Map # 
+    - name: create Etherchannel Totals Mind Map 
+      shell: "npx markmap-cli ../documentation/FACTS/CAMPUS/DISTRIBUTION/{{ inventory_hostname }}_Show_Etherchannel_Totals.md"
+      register: markmap    
+
+# Remove file #
+    - name: Remove file (delete file)
+      file:
+        path: ../documentation/FACTS/CAMPUS/DISTRIBUTION/{{ inventory_hostname }}_Show_Etherchannel_Summary.md
+        state: absent
+
+# Create Etherchannel Summary Markdown file with results #
+    - name: CSV Data Row
+      lineinfile:
+        path: ../documentation/FACTS/CAMPUS/DISTRIBUTION/{{ inventory_hostname }}_Show_Etherchannel_Summary.md
+        line: "| {{ item.key }} | {{ item.value.bundle_id }} | {{ item.value.name }} | {{ item.value.oper_status }} | {% if item.value.protocol is defined %}{{ item.value.protocol }}{% else %}Mode On{% endif %} | {{ item.value.flags }} | {% if item.value.port_channel.port_channel_member_intfs is defined %}{{ item.value.port_channel.port_channel_member_intfs }}{% else %}No Members{% endif %} |"
+        create: yes
+      loop: "{{ pyats_etherchannel_summary.interfaces | dict2items }}"
+
+# Format Markdown #
+    - name: Format Markdown File Clean Up
+      replace:
+        path: ../documentation/FACTS/CAMPUS/DISTRIBUTION/{{ inventory_hostname }}_Show_Etherchannel_Summary.md       
+        regexp: "'"
+        replace: ''
+
+# Format MArkdown #
+    - name: Format Markdown File Clean Up
+      replace:
+        path: ../documentation/FACTS/CAMPUS/DISTRIBUTION/{{ inventory_hostname }}_Show_Etherchannel_Summary.md
+        regexp: '\[|\]|"'
+        replace: ''             
+
+# Format Markdown #
+    - name: Format Markdown File Clean Up
+      replace:
+        path: ../documentation/FACTS/CAMPUS/DISTRIBUTION/{{ inventory_hostname }}_Show_Etherchannel_Summary.md       
+        regexp: ","
+        replace: ' | ' 
+
+# Add Header Rows to Markdown #
+    - name: Markdown Header Row
+      lineinfile:
+        path: ../documentation/FACTS/CAMPUS/DISTRIBUTION/{{ inventory_hostname }}_Show_Etherchannel_Summary.md     
+        insertbefore: BOF
+        line: "{{ item.property }}"
+      with_items:
+        - { property: '| ------------ | --------- | ---- | ------ | -------- | ----- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- |' }
+        - { property: '| Port-Channel | Bundle ID | Name | Status | Protocol | Flags | Member01 | Member02 | Member03 | Member04 | Member05 | Member06 | Member07 | Member08 |' }
+        - { property: '# Etherchannel Summary for {{ inventory_hostname }}' }  
+    
+# Create Mind Map # 
+    - name: create Etherchannel Summary Mind Map 
+      shell: "npx markmap-cli ../documentation/FACTS/CAMPUS/DISTRIBUTION/{{ inventory_hostname }}_Show_Etherchannel_Summary.md"
+      register: markmap   

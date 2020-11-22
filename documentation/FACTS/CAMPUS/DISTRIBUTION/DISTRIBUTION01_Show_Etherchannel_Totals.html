@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Markmap</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+}
+#mindmap {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+}
+</style>
+
+</head>
+<body>
+<svg id="mindmap"></svg>
+<script src="https://cdn.jsdelivr.net/npm/d3@6.2.0"></script><script src="https://cdn.jsdelivr.net/npm/markmap-view@0.1.1"></script><script>((getMarkmap, data) => {
+        const {
+          Markmap
+        } = getMarkmap();
+        window.mm = Markmap.create('svg#mindmap', null, data);
+      })(() => window.markmap,{"t":"heading","d":1,"p":{},"v":"Etherchannel Totals for DISTRIBUTION","c":[{"t":"thead","d":3,"p":{},"v":"","c":[{"t":"th","d":5,"p":{},"v":"Number of Aggregators"},{"t":"th","d":5,"p":{},"v":"Number of LAG in use"}]},{"t":"tbody","d":3,"p":{},"v":"","c":[{"t":"td","d":5,"p":{},"v":"19"},{"t":"td","d":5,"p":{},"v":"19"}]}]})</script>
+</body>
+</html>

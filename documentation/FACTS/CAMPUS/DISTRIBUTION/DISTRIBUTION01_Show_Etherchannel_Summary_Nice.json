@@ -1,0 +1,526 @@
+{
+    "interfaces": {
+        "Port-channel1": {
+            "bundle_id": 1,
+            "flags": "RU",
+            "members": {
+                "TenGigabitEthernet1/1/1": {
+                    "bundled": true,
+                    "flags": "P",
+                    "interface": "TenGigabitEthernet1/1/1",
+                    "port_channel": {
+                        "port_channel_int": "Port-channel1",
+                        "port_channel_member": true
+                    }
+                },
+                "TenGigabitEthernet2/1/1": {
+                    "bundled": false,
+                    "flags": "D",
+                    "interface": "TenGigabitEthernet2/1/1",
+                    "port_channel": {
+                        "port_channel_int": "Port-channel1",
+                        "port_channel_member": true
+                    }
+                }
+            },
+            "name": "Port-channel1",
+            "oper_status": "up",
+            "port_channel": {
+                "port_channel_member": true,
+                "port_channel_member_intfs": [
+                    "TenGigabitEthernet1/1/1",
+                    "TenGigabitEthernet2/1/1"
+                ]
+            },
+            "protocol": "lacp"
+        },
+        "Port-channel10": {
+            "bundle_id": 10,
+            "flags": "SU",
+            "members": {
+                "TenGigabitEthernet1/1/10": {
+                    "bundled": true,
+                    "flags": "P",
+                    "interface": "TenGigabitEthernet1/1/10",
+                    "port_channel": {
+                        "port_channel_int": "Port-channel10",
+                        "port_channel_member": true
+                    }
+                },
+                "TenGigabitEthernet2/1/10": {
+                    "bundled": true,
+                    "flags": "P",
+                    "interface": "TenGigabitEthernet2/1/10",
+                    "port_channel": {
+                        "port_channel_int": "Port-channel10",
+                        "port_channel_member": true
+                    }
+                }
+            },
+            "name": "Port-channel10",
+            "oper_status": "up",
+            "port_channel": {
+                "port_channel_member": true,
+                "port_channel_member_intfs": [
+                    "TenGigabitEthernet1/1/10",
+                    "TenGigabitEthernet2/1/10"
+                ]
+            },
+            "protocol": "lacp"
+        },
+        "Port-channel100": {
+            "bundle_id": 100,
+            "flags": "SU",
+            "members": {
+                "TenGigabitEthernet1/1/13": {
+                    "bundled": true,
+                    "flags": "P",
+                    "interface": "TenGigabitEthernet1/1/13",
+                    "port_channel": {
+                        "port_channel_int": "Port-channel100",
+                        "port_channel_member": true
+                    }
+                },
+                "TenGigabitEthernet2/1/13": {
+                    "bundled": true,
+                    "flags": "P",
+                    "interface": "TenGigabitEthernet2/1/13",
+                    "port_channel": {
+                        "port_channel_int": "Port-channel100",
+                        "port_channel_member": true
+                    }
+                }
+            },
+            "name": "Port-channel100",
+            "oper_status": "up",
+            "port_channel": {
+                "port_channel_member": true,
+                "port_channel_member_intfs": [
+                    "TenGigabitEthernet1/1/13",
+                    "TenGigabitEthernet2/1/13"
+                ]
+            },
+            "protocol": "lacp"
+        },
+        "Port-channel11": {
+            "bundle_id": 11,
+            "flags": "SU",
+            "members": {
+                "TenGigabitEthernet2/1/11": {
+                    "bundled": true,
+                    "flags": "P",
+                    "interface": "TenGigabitEthernet2/1/11",
+                    "port_channel": {
+                        "port_channel_int": "Port-channel11",
+                        "port_channel_member": true
+                    }
+                }
+            },
+            "name": "Port-channel11",
+            "oper_status": "up",
+            "port_channel": {
+                "port_channel_member": true,
+                "port_channel_member_intfs": [
+                    "TenGigabitEthernet2/1/11"
+                ]
+            },
+            "protocol": "lacp"
+        },
+        "Port-channel12": {
+            "bundle_id": 12,
+            "flags": "SD",
+            "name": "Port-channel12",
+            "oper_status": "down"
+        },
+        "Port-channel13": {
+            "bundle_id": 13,
+            "flags": "SD",
+            "name": "Port-channel13",
+            "oper_status": "down"
+        },
+        "Port-channel14": {
+            "bundle_id": 14,
+            "flags": "SU",
+            "members": {
+                "TenGigabitEthernet2/1/8": {
+                    "bundled": true,
+                    "flags": "P",
+                    "interface": "TenGigabitEthernet2/1/8",
+                    "port_channel": {
+                        "port_channel_int": "Port-channel14",
+                        "port_channel_member": true
+                    }
+                }
+            },
+            "name": "Port-channel14",
+            "oper_status": "up",
+            "port_channel": {
+                "port_channel_member": true,
+                "port_channel_member_intfs": [
+                    "TenGigabitEthernet2/1/8"
+                ]
+            },
+            "protocol": "lacp"
+        },
+        "Port-channel2": {
+            "bundle_id": 2,
+            "flags": "SU",
+            "members": {
+                "TenGigabitEthernet1/1/2": {
+                    "bundled": true,
+                    "flags": "P",
+                    "interface": "TenGigabitEthernet1/1/2",
+                    "port_channel": {
+                        "port_channel_int": "Port-channel2",
+                        "port_channel_member": true
+                    }
+                },
+                "TenGigabitEthernet2/1/2": {
+                    "bundled": true,
+                    "flags": "P",
+                    "interface": "TenGigabitEthernet2/1/2",
+                    "port_channel": {
+                        "port_channel_int": "Port-channel2",
+                        "port_channel_member": true
+                    }
+                }
+            },
+            "name": "Port-channel2",
+            "oper_status": "up",
+            "port_channel": {
+                "port_channel_member": true,
+                "port_channel_member_intfs": [
+                    "TenGigabitEthernet1/1/2",
+                    "TenGigabitEthernet2/1/2"
+                ]
+            },
+            "protocol": "lacp"
+        },
+        "Port-channel20": {
+            "bundle_id": 20,
+            "flags": "SU",
+            "members": {
+                "TenGigabitEthernet1/1/12": {
+                    "bundled": true,
+                    "flags": "P",
+                    "interface": "TenGigabitEthernet1/1/12",
+                    "port_channel": {
+                        "port_channel_int": "Port-channel20",
+                        "port_channel_member": true
+                    }
+                },
+                "TenGigabitEthernet2/1/12": {
+                    "bundled": true,
+                    "flags": "P",
+                    "interface": "TenGigabitEthernet2/1/12",
+                    "port_channel": {
+                        "port_channel_int": "Port-channel20",
+                        "port_channel_member": true
+                    }
+                }
+            },
+            "name": "Port-channel20",
+            "oper_status": "up",
+            "port_channel": {
+                "port_channel_member": true,
+                "port_channel_member_intfs": [
+                    "TenGigabitEthernet1/1/12",
+                    "TenGigabitEthernet2/1/12"
+                ]
+            },
+            "protocol": "lacp"
+        },
+        "Port-channel22": {
+            "bundle_id": 22,
+            "flags": "SD",
+            "name": "Port-channel22",
+            "oper_status": "down"
+        },
+        "Port-channel3": {
+            "bundle_id": 3,
+            "flags": "SU",
+            "members": {
+                "TenGigabitEthernet1/1/3": {
+                    "bundled": true,
+                    "flags": "P",
+                    "interface": "TenGigabitEthernet1/1/3",
+                    "port_channel": {
+                        "port_channel_int": "Port-channel3",
+                        "port_channel_member": true
+                    }
+                },
+                "TenGigabitEthernet2/1/3": {
+                    "bundled": true,
+                    "flags": "P",
+                    "interface": "TenGigabitEthernet2/1/3",
+                    "port_channel": {
+                        "port_channel_int": "Port-channel3",
+                        "port_channel_member": true
+                    }
+                }
+            },
+            "name": "Port-channel3",
+            "oper_status": "up",
+            "port_channel": {
+                "port_channel_member": true,
+                "port_channel_member_intfs": [
+                    "TenGigabitEthernet1/1/3",
+                    "TenGigabitEthernet2/1/3"
+                ]
+            },
+            "protocol": "lacp"
+        },
+        "Port-channel4": {
+            "bundle_id": 4,
+            "flags": "SU",
+            "members": {
+                "TenGigabitEthernet1/1/4": {
+                    "bundled": true,
+                    "flags": "P",
+                    "interface": "TenGigabitEthernet1/1/4",
+                    "port_channel": {
+                        "port_channel_int": "Port-channel4",
+                        "port_channel_member": true
+                    }
+                },
+                "TenGigabitEthernet2/1/4": {
+                    "bundled": false,
+                    "flags": "D",
+                    "interface": "TenGigabitEthernet2/1/4",
+                    "port_channel": {
+                        "port_channel_int": "Port-channel4",
+                        "port_channel_member": true
+                    }
+                }
+            },
+            "name": "Port-channel4",
+            "oper_status": "up",
+            "port_channel": {
+                "port_channel_member": true,
+                "port_channel_member_intfs": [
+                    "TenGigabitEthernet1/1/4",
+                    "TenGigabitEthernet2/1/4"
+                ]
+            },
+            "protocol": "lacp"
+        },
+        "Port-channel5": {
+            "bundle_id": 5,
+            "flags": "SU",
+            "members": {
+                "TenGigabitEthernet1/1/6": {
+                    "bundled": true,
+                    "flags": "P",
+                    "interface": "TenGigabitEthernet1/1/6",
+                    "port_channel": {
+                        "port_channel_int": "Port-channel5",
+                        "port_channel_member": true
+                    }
+                }
+            },
+            "name": "Port-channel5",
+            "oper_status": "up",
+            "port_channel": {
+                "port_channel_member": true,
+                "port_channel_member_intfs": [
+                    "TenGigabitEthernet1/1/6"
+                ]
+            },
+            "protocol": "lacp"
+        },
+        "Port-channel50": {
+            "bundle_id": 50,
+            "flags": "SU",
+            "members": {
+                "TenGigabitEthernet1/1/15": {
+                    "bundled": true,
+                    "flags": "P",
+                    "interface": "TenGigabitEthernet1/1/15",
+                    "port_channel": {
+                        "port_channel_int": "Port-channel50",
+                        "port_channel_member": true
+                    }
+                },
+                "TenGigabitEthernet1/1/16": {
+                    "bundled": true,
+                    "flags": "P",
+                    "interface": "TenGigabitEthernet1/1/16",
+                    "port_channel": {
+                        "port_channel_int": "Port-channel50",
+                        "port_channel_member": true
+                    }
+                }
+            },
+            "name": "Port-channel50",
+            "oper_status": "up",
+            "port_channel": {
+                "port_channel_member": true,
+                "port_channel_member_intfs": [
+                    "TenGigabitEthernet1/1/15",
+                    "TenGigabitEthernet1/1/16"
+                ]
+            }
+        },
+        "Port-channel6": {
+            "bundle_id": 6,
+            "flags": "SU",
+            "members": {
+                "TenGigabitEthernet1/1/5": {
+                    "bundled": true,
+                    "flags": "P",
+                    "interface": "TenGigabitEthernet1/1/5",
+                    "port_channel": {
+                        "port_channel_int": "Port-channel6",
+                        "port_channel_member": true
+                    }
+                },
+                "TenGigabitEthernet2/1/5": {
+                    "bundled": true,
+                    "flags": "P",
+                    "interface": "TenGigabitEthernet2/1/5",
+                    "port_channel": {
+                        "port_channel_int": "Port-channel6",
+                        "port_channel_member": true
+                    }
+                }
+            },
+            "name": "Port-channel6",
+            "oper_status": "up",
+            "port_channel": {
+                "port_channel_member": true,
+                "port_channel_member_intfs": [
+                    "TenGigabitEthernet1/1/5",
+                    "TenGigabitEthernet2/1/5"
+                ]
+            },
+            "protocol": "lacp"
+        },
+        "Port-channel60": {
+            "bundle_id": 60,
+            "flags": "SU",
+            "members": {
+                "TenGigabitEthernet2/1/15": {
+                    "bundled": true,
+                    "flags": "P",
+                    "interface": "TenGigabitEthernet2/1/15",
+                    "port_channel": {
+                        "port_channel_int": "Port-channel60",
+                        "port_channel_member": true
+                    }
+                },
+                "TenGigabitEthernet2/1/16": {
+                    "bundled": true,
+                    "flags": "P",
+                    "interface": "TenGigabitEthernet2/1/16",
+                    "port_channel": {
+                        "port_channel_int": "Port-channel60",
+                        "port_channel_member": true
+                    }
+                }
+            },
+            "name": "Port-channel60",
+            "oper_status": "up",
+            "port_channel": {
+                "port_channel_member": true,
+                "port_channel_member_intfs": [
+                    "TenGigabitEthernet2/1/15",
+                    "TenGigabitEthernet2/1/16"
+                ]
+            }
+        },
+        "Port-channel7": {
+            "bundle_id": 7,
+            "flags": "SU",
+            "members": {
+                "TenGigabitEthernet1/1/7": {
+                    "bundled": true,
+                    "flags": "P",
+                    "interface": "TenGigabitEthernet1/1/7",
+                    "port_channel": {
+                        "port_channel_int": "Port-channel7",
+                        "port_channel_member": true
+                    }
+                },
+                "TenGigabitEthernet2/1/7": {
+                    "bundled": true,
+                    "flags": "P",
+                    "interface": "TenGigabitEthernet2/1/7",
+                    "port_channel": {
+                        "port_channel_int": "Port-channel7",
+                        "port_channel_member": true
+                    }
+                }
+            },
+            "name": "Port-channel7",
+            "oper_status": "up",
+            "port_channel": {
+                "port_channel_member": true,
+                "port_channel_member_intfs": [
+                    "TenGigabitEthernet1/1/7",
+                    "TenGigabitEthernet2/1/7"
+                ]
+            },
+            "protocol": "lacp"
+        },
+        "Port-channel8": {
+            "bundle_id": 8,
+            "flags": "SU",
+            "members": {
+                "TenGigabitEthernet1/1/8": {
+                    "bundled": true,
+                    "flags": "P",
+                    "interface": "TenGigabitEthernet1/1/8",
+                    "port_channel": {
+                        "port_channel_int": "Port-channel8",
+                        "port_channel_member": true
+                    }
+                }
+            },
+            "name": "Port-channel8",
+            "oper_status": "up",
+            "port_channel": {
+                "port_channel_member": true,
+                "port_channel_member_intfs": [
+                    "TenGigabitEthernet1/1/8"
+                ]
+            },
+            "protocol": "lacp"
+        },
+        "Port-channel9": {
+            "bundle_id": 9,
+            "flags": "SU",
+            "members": {
+                "TenGigabitEthernet1/1/9": {
+                    "bundled": true,
+                    "flags": "P",
+                    "interface": "TenGigabitEthernet1/1/9",
+                    "port_channel": {
+                        "port_channel_int": "Port-channel9",
+                        "port_channel_member": true
+                    }
+                },
+                "TenGigabitEthernet2/1/9": {
+                    "bundled": true,
+                    "flags": "P",
+                    "interface": "TenGigabitEthernet2/1/9",
+                    "port_channel": {
+                        "port_channel_int": "Port-channel9",
+                        "port_channel_member": true
+                    }
+                }
+            },
+            "name": "Port-channel9",
+            "oper_status": "up",
+            "port_channel": {
+                "port_channel_member": true,
+                "port_channel_member_intfs": [
+                    "TenGigabitEthernet1/1/9",
+                    "TenGigabitEthernet2/1/9"
+                ]
+            },
+            "protocol": "lacp"
+        }
+    },
+    "number_of_aggregators": 19,
+    "number_of_lag_in_use": 19
+}
