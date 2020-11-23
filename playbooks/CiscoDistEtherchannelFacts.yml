@@ -22,7 +22,7 @@
       run_once: true   
 
 # Gather Ansible Facts About Distribution VRFs #
-    - name: show vrf
+    - name: show etherchannel summary
       ios_command:
         commands:
           - show etherchannel summary
